@@ -1,0 +1,9 @@
+### Tasks
+	✔ Scrape data from indeed based on keywords @done (30/10/2021, 18:21:59)
+	✔ Cache the html page based on day month year @done (30/10/2021, 18:22:01)
+	✔ Save data to json @done (30/10/2021, 18:22:02)
+	✔ Save the data to database @done (30/10/2021, 18:22:04)
+	✔ Generate short link @done (30/10/2021, 18:22:05)
+	☐ Generate tracking UTM based on source
+	☐ Post data on twitter
+	☐ Integrate with Glassdoor and get company rating

@@ -1,0 +1,21 @@
+---
+- name: Remove the zoopla scraper
+  hosts: all
+  tasks:
+    - name: Removes the folder
+      shell:
+        cmd: rm -rf ./zoopla_scraper
+        chdir: /home/pi
+      register: out
+
+    - debug: var=out.stdout_lines
+
+    - name: Removes the daily cronjob
+      cron:
+        name: "execute scraper"
+        state: absent
+
+    - name: Removes cron logs
+      shell:
+        cmd: rm -rf ./zoopla_scraper_cron.log
+        chdir: /home/pi

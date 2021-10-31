@@ -1,0 +1,5 @@
+src/__pycache__
+__html__
+virtualenv
+.env
+store.db

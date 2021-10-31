@@ -1,0 +1,46 @@
+---
+- name: Deploy the zoopla scraper
+  hosts: all
+  tasks:
+    - name: Clone scraper repo
+      git:
+        repo: https://github.com/MihaiBlebea/zoopla_scraper.git
+        dest: /home/pi/zoopla_scraper
+        clone: yes
+        update: yes
+
+    - name: Install the software
+      shell:
+        cmd: ./install.sh
+        chdir: /home/pi/zoopla_scraper
+      register: out
+
+    - debug: var=out.stdout_lines
+
+    - name: Creates a daily cronjob
+      cron:
+        name: "execute scraper"
+        minute: "0"
+        hour: "8"
+        job: "cd ${HOME}/zoopla_scraper && ./execute.sh >> ${HOME}/zoopla_scraper_cron.log 2>&1"
+
+    - name: Create the virtual env
+      shell:
+        cmd: make venv-create
+        chdir: /home/pi/zoopla_scraper
+      register: out
+
+    - debug: var=out.stdout_lines
+
+    - name: Install the dependencies in virtualenv
+      shell:
+        cmd: make venv-install-all
+        chdir: /home/pi/zoopla_scraper
+      register: out
+
+    - debug: var=out.stdout_lines
+
+    - name: Start the docker container API
+      shell:
+        cmd: make docker
+        chdir: /home/pi/zoopla_scraper
