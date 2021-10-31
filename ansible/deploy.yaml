@@ -40,6 +40,15 @@
 
     - debug: var=out.stdout_lines
 
+    - name: Copy env file to remote
+      become: true 
+      copy:
+        src: ~/Projects/Python/jobs/.env
+        dest: /home/pi/jobs_scraper/.env
+        owner: pi
+        group: pi        
+        mode: 0644
+
     - name: Start the API server
       shell:
         cmd: ./virtualenv/bin/python3 ./src/api.py &
