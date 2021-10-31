@@ -34,13 +34,13 @@
 
     - name: Install the dependencies in virtualenv
       shell:
-        cmd: make venv-install-all
+        cmd: ./virtualenv/bin/pip3 install -r requirements.txt
         chdir: /home/pi/jobs_scraper
       register: out
 
     - debug: var=out.stdout_lines
 
-    - name: Start the docker container API
+    - name: Start the API server
       shell:
-        cmd: make docker
+        cmd: ./virtualenv/bin/python3 ./src/api.py &
         chdir: /home/pi/jobs_scraper

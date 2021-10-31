@@ -73,8 +73,6 @@ def fetch_html_cache(s, url):
 
 	Path(f"./{CACHE_FOLDER}").mkdir(parents=True, exist_ok=True)
 
-	short_key = store(url)
-
 	link = insert_link(Link(None, url, 0, None))
 	short_key = link.short_key
 	
