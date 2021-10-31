@@ -26,3 +26,14 @@ docker: docker-build docker-run
 
 docker-stop:
 	docker stop jobs && docker rm jobs
+
+ansible-deploy:
+	ansible-playbook -i $$HOME/.ansible/inventory ./ansible/deploy.yaml
+
+ansible-remove:
+	ansible-playbook -i $$HOME/.ansible/inventory ./ansible/remove.yaml
+
+git:
+	git add . && git commit -m "$(msg)" && git push origin master
+
+git-deploy: git ansible-deploy

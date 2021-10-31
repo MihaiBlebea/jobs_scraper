@@ -1,10 +1,10 @@
 ---
-- name: Remove the zoopla scraper
+- name: Remove the jobs scraper
   hosts: all
   tasks:
     - name: Removes the folder
       shell:
-        cmd: rm -rf ./zoopla_scraper
+        cmd: rm -rf ./jobs_scraper
         chdir: /home/pi
       register: out
 
@@ -17,5 +17,5 @@
 
     - name: Removes cron logs
       shell:
-        cmd: rm -rf ./zoopla_scraper_cron.log
+        cmd: rm -rf ./jobs_scraper.log
         chdir: /home/pi
