@@ -3,3 +3,4 @@ __html__
 virtualenv
 .env
 store.db
+jobs.json
