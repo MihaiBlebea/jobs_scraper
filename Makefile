@@ -5,10 +5,10 @@ venv-activate:
 	source virtualenv/bin/activate
 
 venv-lock:
-	pip3 freeze > requirements.txt
+	./virtualenv/bin/pip3 freeze > requirements.txt
 
 venv-install-all:
-	pip3 install -r requirements.txt
+	./virtualenv/bin/pip3 install -r requirements.txt
 
 venv-install:
 	./virtualenv/bin/pip3 install $(package)
@@ -37,3 +37,12 @@ git:
 	git add . && git commit -m "$(msg)" && git push origin master
 
 git-deploy: git ansible-deploy
+
+splash:
+	docker run -p 8050:8050 scrapinghub/splash
+
+db:
+	sqlite3 store.db "VACUUM;"
+
+scrape:
+	./virtualenv/bin/scrapy crawl indeed -O jobs.json

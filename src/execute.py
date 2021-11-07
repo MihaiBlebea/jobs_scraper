@@ -25,7 +25,7 @@ def main():
 	s = HTMLSession()
 	s.headers.update(headers)
 
-	query = "elixir"
+	query = "python"
 
 	scraping = True
 	first_job = None
